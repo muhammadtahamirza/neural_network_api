@@ -9,7 +9,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-// Function to convert any image to MNIST format (28x28 grayscale)
+//  convert any image to MNIST format (28x28 grayscale)
 Eigen::VectorXd convertToMNISTFormat(const std::string& image_data) {
     int width, height, channels;
 
@@ -23,7 +23,6 @@ Eigen::VectorXd convertToMNISTFormat(const std::string& image_data) {
 
     if (!image) throw std::runtime_error("Failed to load image");
 
-    // Auto-detect if we need to invert based on average brightness
     double total_brightness = 0.0;
     for (int i = 0; i < width * height * channels; i += channels) {
         total_brightness += image[i]; // Use first channel (grayscale or R)
@@ -70,7 +69,7 @@ Eigen::VectorXd convertToMNISTFormat(const std::string& image_data) {
     stbi_image_free(image);
     return mnist_image;
 }
-// Your neural network prediction function (replace with your actual model)
+
 int predictDigit(Eigen::VectorXd& mnist_image) {
     std::vector<layer> layers;
     layers.emplace_back(784, 64); //hidden layer
@@ -165,4 +164,5 @@ int main() {
 
     server.listen("localhost", 8080);
     return 0;
+
 }
